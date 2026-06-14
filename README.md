@@ -63,7 +63,7 @@ export default defineConfig([
   # yarn dev
   ```
 
-  3. Open http://localhost:5173 (or the address shown in the terminal)
+  
 
   ## Build
 

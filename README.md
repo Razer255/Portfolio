@@ -17,57 +17,80 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+  # Personal Portfolio — Rishipal Ghosh
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  This repository contains a modern personal portfolio built with React, TypeScript and Vite. It serves as a showcase for projects, skills, experience, and a downloadable resume.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  **Live demo:** (replace with your deployed URL if available)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  **Highlights**
+  - Responsive single-page portfolio with interactive components
+  - 3D and particle effects using Three.js / canvas
+  - TypeScript, Vite, and ESLint for a reliable developer experience
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  ## Features
+  - Home / Hero section
+  - Interactive globe and particle background
+  - Projects gallery with links and descriptions
+  - Experience and skills sections
+  - Contact form / links
+  - Downloadable resume in `public/`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  ## Tech stack
+  - React
+  - TypeScript
+  - Vite
+  - Three.js (for canvas/3D components)
+  - Tailwind / CSS for styling (if used)
+
+  ## Quick Start
+
+  Prerequisites: Node.js (v16+ recommended) and npm or yarn.
+
+  1. Install dependencies
+
+  ```bash
+  npm install
+  # or
+  # yarn
+  ```
+
+  2. Run development server
+
+  ```bash
+  npm run dev
+  # or
+  # yarn dev
+  ```
+
+  3. Open http://localhost:5173 (or the address shown in the terminal)
+
+  ## Build
+
+  ```bash
+  npm run build
+  # or
+  # yarn build
+  ```
+
+  The production build will be placed in the `dist/` folder.
+
+  ## Deployment
+
+  This project can be deployed to static hosts such as Vercel, Netlify, or GitHub Pages. Point the deployment to the `dist/` directory created by `npm run build`.
+
+  ## Contributing
+  - Fork the repo and create a feature branch.
+  - Open a pull request with a clear description of your changes.
+
+  ## License
+  This repository does not include a license file. Add one if you want to grant reuse rights (for example, MIT).
+
+  ## Author
+  Rishipal Ghosh — (replace with your preferred contact or social links)
+
+  Resume: `public/Rishipal_Ghosh_Resume.pdf`
+
+  ---
+
+  If you'd like, I can add a screenshot, a live demo link, or expand the Installation/Contribution sections. Update the contact details and deployment URL before publishing.

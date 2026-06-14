@@ -39,6 +39,19 @@ export function Experience() {
         'Followed clean-code principles and structured documentation standards, producing maintainable and reusable code modules.'
       ],
       tags: ['Python', 'Automation Scripts', 'AI/ML Basic', 'Clean Code']
+    },
+    {
+      role: 'Cyber Security Intern',
+      company: 'TechLang',
+      period: 'June 2023 – August 2023',
+      location: 'Remote',
+      highlights: [
+        'Conducted OSINT-based vulnerability assessments and network security testing using Kali Linux, Wireshark, and Metasploit.',
+        'Performed ethical hacking simulations and security analysis identifying system weaknesses aligned with OWASP security frameworks.',
+        'Documented security findings with structured risk assessment reports and actionable remediation recommendations.',
+        'Applied OWASP Top 10 secure coding standards to mitigate SQL injection and XSS vulnerabilities across the application layer.'
+      ],
+      tags: ['VAPT', 'OSINT', 'Kali Linux', 'Wireshark', 'Metasploit', 'OWASP Top 10']
     }
   ];
 

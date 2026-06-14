@@ -1,12 +1,26 @@
-import { FolderGit2, ExternalLink, ShieldCheck, Cpu, Terminal } from 'lucide-react';
+import { FolderGit2, ExternalLink, ShieldCheck, Cpu, Terminal, Activity } from 'lucide-react';
 
 export function Projects() {
   const projects = [
     {
+      title: 'Enterprise SIEM & Endpoint Security Lab',
+      category: 'SOC & Telemetry Monitoring',
+      status: 'OPERATIONAL',
+      icon: <Activity className="proj-icon cyan" size={24} />,
+      desc: 'An enterprise-grade SIEM/EDR monitoring infrastructure deployed to audit, analyze, and visualize endpoint telemetry across active virtual environments.',
+      bullets: [
+        'Wazuh Manager, Indexer & Dashboard fully configured on dedicated Ubuntu Server.',
+        'Windows 10 VM integrated as secure endpoint collecting active telemetry.',
+        'Implemented FIM, Sysmon logging, and trigger-alert response policies.'
+      ],
+      tech: ['Wazuh SIEM', 'Ubuntu VM', 'Windows Auditing', 'Sysmon', 'Active Response', 'EDR'],
+      link: 'https://github.com/Razer255'
+    },
+    {
       title: 'Fake Review Detection API',
       category: 'Backend & Machine Learning',
       status: 'OPERATIONAL',
-      icon: <Cpu className="proj-icon cyan" size={24} />,
+      icon: <Cpu className="proj-icon purple" size={24} />,
       desc: 'A robust REST API backend using FastAPI that integrates a machine learning model to verify review authenticity, supporting JWT authentication, structured logging, and audited records.',
       bullets: [
         'Designed scalable database schema in MongoDB with optimized query sets.',

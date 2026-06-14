@@ -300,3 +300,15 @@ section {
   background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
   margin: 2rem 0;
 }
+
+.title-nowrap {
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .title-nowrap {
+    white-space: normal !important;
+    display: inline !important;
+  }
+}

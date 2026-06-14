@@ -5,28 +5,57 @@ export function TerminalIntro() {
   const [terminalLines, setTerminalLines] = useState<string[]>([]);
   const [currentLineIdx, setCurrentLineIdx] = useState(0);
 
+  // States for the heading typewriter loop
+  const [typedText, setTypedText] = useState('');
+  const [wordIdx, setWordIdx] = useState(0);
+  const [subIdx, setSubIdx] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const words = ['Core', 'SIEM Pipelines', 'Secure APIs', 'Python Automation', 'SOC Monitors'];
   const logs = [
     'Initializing secure handshake protocol...',
     'Establishing encrypted bridge to rishipal.sec... [SUCCESS]',
     'Fetching credentials from local db...',
     '>> NAME: Rishipal Ghosh',
-    '>> MAJOR: B.Tech in Cyber Security (CGPA: 8.34/10.0)',
-    '>> FOCUS: Secure REST APIs, Cyber Reconnaissance, AI Automation',
-    '>> TARGET: Junior Backend Developer / AppSec Role',
-    '>> STATUS: Seeking opportunities for 2026 graduation',
+    '>> MAJOR: B.Tech in CSIT Specialization In Cyber Security',
+    '>> TARGET: SOC, VAPT, DevOps, Security Analyst',
+    '>> STATUS: Currently in Final year',
     'Decrypting contact channels... found (rishipal123ghosh@gmail.com)',
     'System ready. Access granted.'
   ];
 
+  // Effect for CLI terminal simulation typing
   useEffect(() => {
     if (currentLineIdx < logs.length) {
       const timeout = setTimeout(() => {
         setTerminalLines((prev) => [...prev, logs[currentLineIdx]]);
         setCurrentLineIdx((prev) => prev + 1);
-      }, 700 + Math.random() * 600); // realistic variance in typing speeds
+      }, 700 + Math.random() * 600);
       return () => clearTimeout(timeout);
     }
   }, [currentLineIdx]);
+
+  // Effect for Title Typewriter Loop
+  useEffect(() => {
+    if (subIdx === words[wordIdx].length + 1 && !isDeleting) {
+      const pauseTimeout = setTimeout(() => setIsDeleting(true), 2200); // pause at full word
+      return () => clearTimeout(pauseTimeout);
+    }
+
+    if (subIdx === 0 && isDeleting) {
+      setIsDeleting(false);
+      setWordIdx((prev) => (prev + 1) % words.length); // shift word
+      return;
+    }
+
+    const typeTimeout = setTimeout(() => {
+      setTypedText(words[wordIdx].substring(0, isDeleting ? subIdx - 1 : subIdx + 1));
+      setSubIdx((prev) => prev + (isDeleting ? -1 : 1));
+    }, isDeleting ? 40 : 90 + Math.random() * 40); // typing speed vs deleting speed
+
+    return () => clearTimeout(typeTimeout);
+  }, [subIdx, wordIdx, isDeleting]);
+
 
   const handleScrollToProjects = () => {
     const element = document.getElementById('projects');
@@ -52,7 +81,9 @@ export function TerminalIntro() {
           </div>
           <h1 className="hero-title">
             Securing the Backend,<br />
-            <span className="gradient-text">Architecting the Core</span>
+            Architecting the<br />
+            <span className="gradient-text" style={{ whiteSpace: 'nowrap' }}>{typedText}</span>
+            <span className="cursor-blink">|</span>
           </h1>
           <p className="hero-subtitle">
             I'm a Cybersecurity undergraduate and Backend Engineer specializing in building secure, high-performance REST APIs, Python automations, and scalable databases.
@@ -142,9 +173,27 @@ export function TerminalIntro() {
           animation: pulse 2s infinite;
         }
         .hero-title {
-          font-size: 3.5rem;
-          line-height: 1.15;
+          font-size: 3.2rem;
+          line-height: 1.2;
           margin-bottom: 1.5rem;
+        }
+        .title-nowrap {
+          display: inline-block;
+          white-space: nowrap;
+        }
+        @media (max-width: 1200px) {
+          .hero-title {
+            font-size: 2.8rem;
+          }
+        }
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2.2rem;
+          }
+          .title-nowrap {
+            white-space: normal;
+            display: inline;
+          }
         }
         .gradient-text {
           background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));

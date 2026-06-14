@@ -89,6 +89,32 @@ const SKILL_ICONS: Record<string, React.ReactNode> = {
       <path d="M22 11h-4M20 9v4"/>
     </svg>
   ),
+  'Wazuh SIEM / EDR': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="M12 8v4M8 12h8"/>
+    </svg>
+  ),
+  'VAPT (Pen Testing)': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  ),
+  'Threat Monitoring': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+    </svg>
+  ),
+  'Network Auditing': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="18" cy="5" r="3"/>
+      <circle cx="6" cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <path d="m9 10.5 6-3.5M9 13.5l6 3.5"/>
+    </svg>
+  ),
   'Docker': (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="10" width="4" height="4" rx="1"/>
@@ -171,12 +197,16 @@ export function Skills() {
       ]
     },
     {
-      title: 'Application Security',
+      title: 'Cybersecurity & VAPT',
       icon: <Shield className="skill-icon-style green" size={24} />,
       colorClass: 'green-theme',
       skills: [
         { name: 'Secure Coding' },
         { name: 'Input Validation' },
+        { name: 'Wazuh SIEM / EDR' },
+        { name: 'VAPT (Pen Testing)' },
+        { name: 'Threat Monitoring' },
+        { name: 'Network Auditing' },
         { name: 'OWASP Top 10' },
         { name: 'Role-Based Access (RBAC)' }
       ]

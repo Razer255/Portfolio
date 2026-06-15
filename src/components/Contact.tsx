@@ -41,6 +41,15 @@ export function Contact() {
 
     setTimeout(() => {
       setConsoleLog((prev) => [...prev, 'Transmission successful. Connection closed.']);
+      
+      // Construct prefilled mailto link
+      const subject = encodeURIComponent(`Message from ${formState.name} (via Portfolio)`);
+      const body = encodeURIComponent(
+        `Hi Rishipal,\n\nSender: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}\n\n---\nSent from Portfolio Get-In-Touch terminal.`
+      );
+      
+      window.location.href = `mailto:rishipal123ghosh@gmail.com?subject=${subject}&body=${body}`;
+
       setIsSubmitting(false);
       setIsSuccess(true);
       setFormState({ name: '', email: '', message: '' });

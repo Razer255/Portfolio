@@ -6,11 +6,15 @@ import { Projects } from './components/Projects';
 import { CertsAchievements } from './components/CertsAchievements';
 import { Contact } from './components/Contact';
 import { ThreeCanvas } from './components/ThreeCanvas';
+import { CustomCursor } from './components/CustomCursor';
 import { Heart } from 'lucide-react';
 
 function App() {
   return (
     <>
+      {/* Custom interactive cursor overlay */}
+      <CustomCursor />
+
       {/* 3D Background Canvas Layer */}
       <ThreeCanvas />
 

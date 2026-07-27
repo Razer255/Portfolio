@@ -2,12 +2,15 @@ import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export function ParticleGrid() {
+interface ParticleGridProps {
+  count?: number;
+}
+
+export function ParticleGrid({ count = 750 }: ParticleGridProps) {
   const pointsRef = useRef<THREE.Points>(null);
 
   // Generate random points in space
   const [positions, colors] = useMemo(() => {
-    const count = 1200;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
 
@@ -29,26 +32,22 @@ export function ParticleGrid() {
     }
 
     return [positions, colors];
-  }, []);
+  }, [count]);
 
   useFrame((state) => {
     if (!pointsRef.current) return;
 
-    // Slow rotation
-    pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
-    pointsRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.02) * 0.1;
+    const time = state.clock.getElapsedTime();
+    const targetX = state.pointer.x * 0.15;
+    const targetY = state.pointer.y * 0.15;
 
-    // Interactive mouse tilt
-    const targetX = state.pointer.x * 0.3;
-    const targetY = state.pointer.y * 0.3;
-    
-    pointsRef.current.rotation.y += (targetX - pointsRef.current.rotation.y) * 0.05;
-    pointsRef.current.rotation.x += (targetY - pointsRef.current.rotation.x) * 0.05;
+    pointsRef.current.rotation.y = time * 0.03 + targetX;
+    pointsRef.current.rotation.x = Math.sin(time * 0.02) * 0.08 + targetY;
   });
 
   return (
     <points ref={pointsRef}>
-      <bufferGeometry>
+      <bufferGeometry key={count}>
         <bufferAttribute
           attach="attributes-position"
           args={[positions, 3]}

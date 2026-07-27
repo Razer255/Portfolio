@@ -96,6 +96,8 @@ code {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Layout container on top of 3D */
@@ -143,15 +145,16 @@ section {
 
 /* Cyber Glassmorphism Card */
 .cyber-card {
-  background: rgba(12, 14, 23, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 14, 23, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid var(--border-glass);
   border-radius: 12px;
   padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  contain: layout style paint;
 }
 
 .cyber-card::before {
@@ -472,4 +475,33 @@ section {
     display: none !important;
   }
 }
+
+/* Performance Optimizations & Reduced Motion Controls */
+.custom-cursor-dot,
+.custom-cursor-ring {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cyber-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cyber-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(12, 14, 23, 0.92);
+  }
+}
+
 

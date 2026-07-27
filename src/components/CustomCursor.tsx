@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { getPerformanceProfile } from '../utils/performance';
 
 interface Particle {
   x: number;
@@ -27,20 +28,14 @@ export function CustomCursor() {
   const [isClicked, setIsClicked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Sync state with ref for access in listeners without re-binding
   const hoverStateRef = useRef(hoverState);
   useEffect(() => {
     hoverStateRef.current = hoverState;
   }, [hoverState]);
 
   useEffect(() => {
-    // Check if the user is on a touch device
-    const isTouchDevice = 
-      'ontouchstart' in window || 
-      navigator.maxTouchPoints > 0 || 
-      window.matchMedia('(pointer: coarse)').matches;
-      
-    if (isTouchDevice) return;
+    const profile = getPerformanceProfile();
+    if (profile.isTouch) return;
 
     const resizeCanvas = () => {
       if (canvasRef.current) {
@@ -50,16 +45,18 @@ export function CustomCursor() {
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas, { passive: true });
 
     const spawnParticle = (x: number, y: number) => {
-      // Small random drift velocity
+      if (!profile.enableCursorParticles) return;
+      if (particles.current.length > 25) return; // Cap maximum active particles
+
       const angle = Math.random() * Math.PI * 2;
       const speed = 0.3 + Math.random() * 0.8;
       const vx = Math.cos(angle) * speed;
-      const vy = Math.sin(angle) * speed - 0.4; // slight upward draft
+      const vy = Math.sin(angle) * speed - 0.4;
 
-      let color = '#00f0ff'; // default cyan
+      let color = '#00f0ff';
       if (hoverStateRef.current === 'purple') {
         color = '#bd00ff';
       } else if (hoverStateRef.current === 'green') {
@@ -73,21 +70,22 @@ export function CustomCursor() {
         vy,
         text: Math.random() > 0.5 ? '1' : '0',
         alpha: 1.0,
-        size: 10 + Math.random() * 6,
-        decay: 0.015 + Math.random() * 0.01,
+        size: 10 + Math.random() * 5,
+        decay: 0.025 + Math.random() * 0.015,
         color,
       });
     };
 
     const spawnClickBurst = (x: number, y: number) => {
-      const count = 12;
+      if (!profile.enableCursorParticles) return;
+      const count = 6; // Reduced burst count from 12 to 6
       let burstColor = '#00f0ff';
       if (hoverStateRef.current === 'purple') burstColor = '#bd00ff';
       else if (hoverStateRef.current === 'green') burstColor = '#39ff14';
 
       for (let i = 0; i < count; i++) {
         const angle = (i / count) * Math.PI * 2;
-        const speed = 1.5 + Math.random() * 2.5;
+        const speed = 1.2 + Math.random() * 2.0;
         const vx = Math.cos(angle) * speed;
         const vy = Math.sin(angle) * speed;
 
@@ -98,8 +96,8 @@ export function CustomCursor() {
           vy,
           text: Math.random() > 0.5 ? '1' : '0',
           alpha: 1.0,
-          size: 11 + Math.random() * 5,
-          decay: 0.02 + Math.random() * 0.015,
+          size: 11 + Math.random() * 4,
+          decay: 0.03 + Math.random() * 0.02,
           color: burstColor,
         });
       }
@@ -114,18 +112,18 @@ export function CustomCursor() {
       }
 
       const now = Date.now();
-      // Only spawn trailing particles when moving, spaced by 50ms
-      if (now - lastSpawnTime.current > 50) {
+      if (now - lastSpawnTime.current > 70) {
         spawnParticle(e.clientX, e.clientY);
         lastSpawnTime.current = now;
       }
     };
 
+    // Optimized hover detection using target matching without redundant DOM queries
     const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const interactive = target.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select, .nav-link, .interactive-item');
+      const interactive = target.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select');
       if (interactive) {
         if (
           interactive.classList.contains('btn-secondary') ||
@@ -147,13 +145,13 @@ export function CustomCursor() {
     };
 
     const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const interactive = target.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select, .nav-link, .interactive-item');
+      const interactive = target.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select');
       if (interactive) {
-        const relatedTarget = e.relatedTarget as HTMLElement;
-        if (!relatedTarget || !relatedTarget.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select, .nav-link, .interactive-item')) {
+        const relatedTarget = e.relatedTarget as HTMLElement | null;
+        if (!relatedTarget || !relatedTarget.closest('a, button, [role="button"], .cyber-card, .btn-primary, .btn-secondary, input, textarea, select')) {
           setHoverState('none');
         }
       }
@@ -176,23 +174,23 @@ export function CustomCursor() {
       setIsVisible(true);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mouseout', handleMouseOut);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    window.addEventListener('mouseout', handleMouseOut, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
 
     let animationFrameId: number;
 
     const render = () => {
-      // Lerp ring position (smooth follow)
-      const lerpFactor = 0.16;
+      // Smooth lerp
+      const lerpFactor = 0.2;
       ring.current.x += (mouse.current.x - ring.current.x) * lerpFactor;
       ring.current.y += (mouse.current.y - ring.current.y) * lerpFactor;
 
-      // Position DOM nodes
+      // Position DOM elements with hardware accelerated translate3d
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouse.current.x}px, ${mouse.current.y}px, 0)`;
       }
@@ -200,33 +198,30 @@ export function CustomCursor() {
         ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0)`;
       }
 
-      // Render canvas particles
-      const canvas = canvasRef.current;
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
+      // Render canvas particles without expensive shadowBlur
+      if (profile.enableCursorParticles && canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d');
         if (ctx) {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
           const activeParticles = particles.current;
-          for (let i = activeParticles.length - 1; i >= 0; i--) {
-            const p = activeParticles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.alpha -= p.decay;
+          if (activeParticles.length > 0) {
+            ctx.font = '12px "JetBrains Mono", monospace';
+            for (let i = activeParticles.length - 1; i >= 0; i--) {
+              const p = activeParticles[i];
+              p.x += p.vx;
+              p.y += p.vy;
+              p.alpha -= p.decay;
 
-            if (p.alpha <= 0) {
-              activeParticles.splice(i, 1);
-              continue;
+              if (p.alpha <= 0) {
+                activeParticles.splice(i, 1);
+                continue;
+              }
+
+              ctx.globalAlpha = p.alpha;
+              ctx.fillStyle = p.color;
+              ctx.fillText(p.text, p.x, p.y);
             }
-
-            ctx.save();
-            ctx.globalAlpha = p.alpha;
-            ctx.fillStyle = p.color;
-            ctx.font = `${p.size}px "JetBrains Mono", "Fira Code", monospace`;
-            ctx.shadowColor = p.color;
-            ctx.shadowBlur = 6;
-            ctx.fillText(p.text, p.x, p.y);
-            ctx.restore();
           }
         }
       }

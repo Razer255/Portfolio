@@ -27,33 +27,85 @@ export function Contact() {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) return;
 
     setIsSubmitting(true);
     setConsoleLog(['Verifying contact payload...', 'Applying TLS encryption... [OK]']);
 
-    // Simulate submission progress
+    const formspreeId = import.meta.env.VITE_FORMSPREE_FORM_ID;
+
+    // Simulate submission logs
     setTimeout(() => {
-      setConsoleLog((prev) => [...prev, 'Routing package to rishipal123ghosh@gmail.com... [CONNECTED]']);
-    }, 800);
+      setConsoleLog((prev) => [...prev, 'Initiating secure routing protocol... [CONNECTING]']);
+    }, 600);
+
+    if (!formspreeId) {
+      // Fallback to mailto link if Formspree ID is not configured
+      setTimeout(() => {
+        setConsoleLog((prev) => [
+          ...prev,
+          'WARNING: External route ID not found.',
+          'Defaulting to client-side mailto protocol...',
+          'Transmission package generated successfully.'
+        ]);
+      }, 1200);
+
+      setTimeout(() => {
+        const subject = encodeURIComponent(`Message from ${formState.name} (via Portfolio)`);
+        const body = encodeURIComponent(
+          `Hi Rishipal,\n\nSender: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}\n\n---\nSent from Portfolio Get-In-Touch terminal.`
+        );
+        
+        window.location.href = `mailto:rishipal123ghosh@gmail.com?subject=${subject}&body=${body}`;
+
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        setFormState({ name: '', email: '', message: '' });
+      }, 2500);
+      return;
+    }
 
     setTimeout(() => {
-      setConsoleLog((prev) => [...prev, 'Transmission successful. Connection closed.']);
-      
-      // Construct prefilled mailto link
-      const subject = encodeURIComponent(`Message from ${formState.name} (via Portfolio)`);
-      const body = encodeURIComponent(
-        `Hi Rishipal,\n\nSender: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}\n\n---\nSent from Portfolio Get-In-Touch terminal.`
-      );
-      
-      window.location.href = `mailto:rishipal123ghosh@gmail.com?subject=${subject}&body=${body}`;
+      setConsoleLog((prev) => [...prev, `Routing package to endpoint [${formspreeId}]... [CONNECTED]`]);
+    }, 1200);
 
+    try {
+      // Small delay to simulate terminal execution lag
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message
+        })
+      });
+
+      if (response.ok) {
+        setConsoleLog((prev) => [...prev, 'Transmission successful. Connection closed.']);
+        setTimeout(() => {
+          setIsSubmitting(false);
+          setIsSuccess(true);
+          setFormState({ name: '', email: '', message: '' });
+        }, 800);
+      } else {
+        throw new Error('Endpoint rejected package.');
+      }
+    } catch (error) {
+      setConsoleLog((prev) => [
+        ...prev,
+        'ERROR: Transmission failed to compile.',
+        'Please try again or contact me directly at rishipal123ghosh@gmail.com.'
+      ]);
       setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormState({ name: '', email: '', message: '' });
-    }, 2000);
+    }
   };
 
   const handleDownloadResume = () => {

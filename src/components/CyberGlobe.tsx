@@ -11,7 +11,7 @@ export function CyberGlobe() {
   // Generate coordinate locations on the globe for node indicators
   const nodes = useMemo(() => {
     const tempNodes = [];
-    const count = 12;
+    const count = 10;
     const radius = 6;
     for (let i = 0; i < count; i++) {
       const u = Math.random();
@@ -32,22 +32,21 @@ export function CyberGlobe() {
     const time = state.clock.getElapsedTime();
     
     if (groupRef.current) {
-      // Floating/bobbing effect
-      groupRef.current.position.y = Math.sin(time * 0.5) * 1.5;
+      groupRef.current.position.y = Math.sin(time * 0.4) * 1.2;
     }
     
     if (outerSphereRef.current) {
-      outerSphereRef.current.rotation.y = time * 0.08;
-      outerSphereRef.current.rotation.x = time * 0.03;
+      outerSphereRef.current.rotation.y = time * 0.06;
+      outerSphereRef.current.rotation.x = time * 0.02;
     }
 
     if (innerSphereRef.current) {
-      innerSphereRef.current.rotation.y = -time * 0.15;
+      innerSphereRef.current.rotation.y = -time * 0.12;
     }
 
     if (ringRef.current) {
       ringRef.current.rotation.x = Math.PI / 3;
-      ringRef.current.rotation.z = -time * 0.2;
+      ringRef.current.rotation.z = -time * 0.15;
     }
   });
 
@@ -55,7 +54,7 @@ export function CyberGlobe() {
     <group ref={groupRef} position={[10, 0, -8]}>
       {/* Outer Wireframe Globe */}
       <mesh ref={outerSphereRef}>
-        <icosahedronGeometry args={[6, 2]} />
+        <icosahedronGeometry args={[6, 1]} />
         <meshBasicMaterial
           color="#00f0ff"
           wireframe
@@ -68,7 +67,7 @@ export function CyberGlobe() {
       {/* Outer Glow Node Points */}
       {nodes.map((pos, idx) => (
         <mesh key={idx} position={pos}>
-          <sphereGeometry args={[0.2, 8, 8]} />
+          <sphereGeometry args={[0.18, 6, 6]} />
           <meshBasicMaterial
             color={idx % 2 === 0 ? "#39ff14" : "#bd00ff"}
             transparent
@@ -92,7 +91,7 @@ export function CyberGlobe() {
 
       {/* Orbital Ring */}
       <mesh ref={ringRef}>
-        <ringGeometry args={[7.5, 7.7, 64]} />
+        <ringGeometry args={[7.5, 7.7, 32]} />
         <meshBasicMaterial
           color="#00f0ff"
           side={THREE.DoubleSide}
@@ -101,9 +100,6 @@ export function CyberGlobe() {
           blending={THREE.AdditiveBlending}
         />
       </mesh>
-
-      {/* Subtle point light inside the globe */}
-      <pointLight color="#00f0ff" intensity={5} distance={15} />
     </group>
   );
 }

@@ -1,96 +1,116 @@
-# React + TypeScript + Vite
+# 👋 Hey, I'm Rishipal Ghosh
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Cybersecurity Enthusiast | Full Stack Developer | Software Engineer
 
-Currently, two official plugins are available:
+I build modern web applications, explore cybersecurity, and develop technology-driven solutions to real-world problems.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Welcome to my personal portfolio repository! This project showcases my technical skills, development journey, selected projects, and experience across **Cybersecurity and Full Stack Development**.
 
-## React Compiler
+🌐 **Portfolio:** [Visit My Portfolio]((https://portfolio-ebon-seven-70.vercel.app/))
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 About Me
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🎓 Computer Science & Engineering graduate with a focus on Cybersecurity.
+- 💻 Interested in Full Stack Development, Application Security, and Security Operations.
+- 🔐 Exploring vulnerability assessment, penetration testing, network security, and SIEM technologies.
+- ⚡ Experienced in building web applications using React, TypeScript, Node.js, and MongoDB.
+- 🧠 Passionate about problem-solving, continuous learning, and building practical projects.
 
-```js
-export default defineConfig([
-  # Personal Portfolio — Rishipal Ghosh
+---
 
-  This repository contains a modern personal portfolio built with React, TypeScript and Vite. It serves as a showcase for projects, skills, experience, and a downloadable resume.
+## 🛠️ Tech Stack
 
-  **Live demo:** (replace with your deployed URL if available)
+### Programming Languages
+![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
-  **Highlights**
-  - Responsive single-page portfolio with interactive components
-  - 3D and particle effects using Three.js / canvas
-  - TypeScript, Vite, and ESLint for a reliable developer experience
+### Frontend Development
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-  ## Features
-  - Home / Hero section
-  - Interactive globe and particle background
-  - Projects gallery with links and descriptions
-  - Experience and skills sections
-  - Contact form / links
-  - Downloadable resume in `public/`
+### Backend & Database
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 
-  ## Tech stack
-  - React
-  - TypeScript
-  - Vite
-  - Three.js (for canvas/3D components)
-  - Tailwind / CSS for styling (if used)
+### Cybersecurity & Tools
+![Kali Linux](https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kalilinux&logoColor=white)
+![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white)
+![Nmap](https://img.shields.io/badge/Nmap-4682B4?style=for-the-badge)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-  ## Quick Start
+---
 
-  Prerequisites: Node.js (v16+ recommended) and npm or yarn.
+## 💡 Featured Projects
 
-  1. Install dependencies
+Here are some projects that represent my development and cybersecurity interests.
 
-  ```bash
-  npm install
-  # or
-  # yarn
-  ```
+| Project | Description | Technologies |
+|---|---|---|
+| **Fake Review Detection System** | Machine learning-based system to identify and detect potentially fake online reviews. | Python, Flask, Scikit-learn |
+| **TechHub E-Commerce** | Hardware e-commerce application with product listings and checkout functionality. | React, TypeScript, Tailwind CSS |
+| **Jarvis AI Assistant** | Desktop voice assistant with a graphical interface and automation capabilities. | Python, Eel, Speech Recognition |
+| **Cybersecurity Reconnaissance Tool** | Reconnaissance tool for security information gathering and assessment. | Python, Cybersecurity Tools |
 
-  2. Run development server
+🔗 Explore more projects on my [GitHub Profile](https://github.com/Razer255).
 
-  ```bash
-  npm run dev
-  # or
-  # yarn dev
-  ```
+---
 
-  
+## 🔭 Currently Exploring
 
-  ## Build
+- 🔐 Security Operations Center (SOC) and SIEM monitoring.
+- 🛡️ Vulnerability Assessment and Penetration Testing (VAPT).
+- ☁️ Cloud Security and Infrastructure Security.
+- ⚙️ Full Stack Application Development.
+- 🧩 Data Structures and Algorithms.
 
-  ```bash
-  npm run build
-  # or
-  # yarn build
-  ```
+---
 
-  The production build will be placed in the `dist/` folder.
+## 📊 GitHub Statistics
 
-  ## Deployment
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Razer255&show_icons=true&theme=tokyonight&hide_border=true" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Razer255&layout=compact&theme=tokyonight&hide_border=true" height="165" />
+</p>
 
-  This project can be deployed to static hosts such as Vercel, Netlify, or GitHub Pages. Point the deployment to the `dist/` directory created by `npm run build`.
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=Razer255&theme=tokyonight&hide_border=true" />
+</p>
 
-  ## Contributing
-  - Fork the repo and create a feature branch.
-  - Open a pull request with a clear description of your changes.
+---
 
-  ## License
-  This repository does not include a license file. Add one if you want to grant reuse rights (for example, MIT).
+## 🤝 Let's Connect
 
-  ## Author
-  Rishipal Ghosh — (replace with your preferred contact or social links)
+I'm always interested in connecting with developers, cybersecurity professionals, and people working on interesting technology projects.
 
-  Resume: `public/Rishipal_Ghosh_Resume.pdf`
+<p align="left">
+  <a href="https://github.com/Razer255">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  <a href="https://www.linkedin.com/in/rishipal-ghosh-29225a255/">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="mailto:rishipal123.work@gmail.com">
+    <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+</p>
 
-  ---
+---
 
-  If you'd like, I can add a screenshot, a live demo link, or expand the Installation/Contribution sections. Update the contact details and deployment URL before publishing.
+<p align="center">
+  <i>"Building, breaking, learning, and securing — one project at a time."</i>
+</p>
+
+<p align="center">
+  ⭐ If you find my work interesting, consider exploring my repositories!
+</p>

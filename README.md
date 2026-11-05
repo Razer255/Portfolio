@@ -79,14 +79,24 @@ Here are some projects that represent my development and cybersecurity interests
 ## 📊 GitHub Statistics
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Razer255&show_icons=true&theme=tokyonight&hide_border=true" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Razer255&layout=compact&theme=tokyonight&hide_border=true" height="165" />
+  <img
+    src="https://github-stats-extended.vercel.app/api?username=Razer255&show_icons=true&theme=tokyonight&hide_border=true"
+    height="165"
+    alt="GitHub Statistics"
+  />
+  <img
+    src="https://github-stats-extended.vercel.app/api/top-langs/?username=Razer255&layout=compact&theme=tokyonight&hide_border=true"
+    height="165"
+    alt="Most Used Languages"
+  />
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Razer255&theme=tokyonight&hide_border=true" />
+  <img
+    src="https://streak-stats.demolab.com?user=Razer255&theme=tokyonight&hide_border=true"
+    alt="GitHub Contribution Streak"
+  />
 </p>
-
 ---
 
 ## 🤝 Let's Connect
